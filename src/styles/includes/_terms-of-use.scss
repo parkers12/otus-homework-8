@@ -1,0 +1,23 @@
+/* Terms of use styles */
+
+.terms-of-use {
+  @include flex-column;
+  padding-top: $sp * 20;
+  font-weight: $font-weight-light;
+
+  &__title {
+    text-align: $text-align;
+  }
+
+  &__text {
+    width: $width-content;
+    margin: 2rem auto 0;
+
+    p {
+      line-height: $line-height + 10;
+      text-align: justify;
+    }
+  }
+}
+
+/* Terms of use styles */

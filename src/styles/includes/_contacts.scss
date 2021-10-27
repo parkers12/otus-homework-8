@@ -1,0 +1,49 @@
+/* Contacts styles */
+
+.contacts {
+  @include flex-column;
+  padding-top: $sp * 20;
+  font-weight: $font-weight-light;
+
+  &__title {
+    text-align: $text-align;
+  }
+
+  &__subtitle {
+    font-size: $font-size-main;
+    line-height: $line-height + 10;
+    text-align: $text-align;
+    opacity: $opacity-middle;
+    width: $width-content;
+    margin: 2rem auto 0;
+  }
+
+  &__map {
+    margin: $sp * 10 auto 0;
+    height: 40rem;
+    width: $width-content;
+  }
+
+  &__list {
+    @include flex-column;
+    margin: $sp * 10 auto 0;
+    width: $width-content;
+
+    &-item {
+      opacity: $opacity-middle;
+      font-size: $font-size-main;
+      line-height: $line-height + 10;
+      flex: 1;
+
+      & + & {
+        margin-top: $sp * 3;
+      }
+
+      b {
+        font-weight: $font-weight-middle;
+      }
+    }
+  }
+}
+
+/* Contacts styles */

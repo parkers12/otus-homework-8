@@ -1,0 +1,38 @@
+/* Slider styles */
+
+.slider {
+  @include flex-column;
+  background: linear-gradient(rgba($black, 0.2), rgba($black, 0.5)),
+    url("#{$path-img}/bg.jpg");
+  padding: $sp * 15 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  font-weight: $font-weight-light;
+
+  &__name {
+    width: $xl;
+    margin: 0 auto;
+    color: $white;
+
+    &-title {
+      font-size: $font-size-base * 4;
+      line-height: $line-height - 30;
+      max-width: 40rem;
+    }
+
+    &-subtitle {
+      font-size: $font-size-second;
+      line-height: $line-height + 10;
+      margin-top: $sp * 8;
+      max-width: 36rem;
+      opacity: $opacity-middle;
+    }
+
+    &-button {
+      margin-top: $sp * 20;
+    }
+  }
+}
+
+/* /Slider styles */

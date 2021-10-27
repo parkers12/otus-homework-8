@@ -1,0 +1,56 @@
+/* Header styles */
+
+.header {
+  @include flex-column;
+  background-image: url("#{$path-img}/bg.jpg");
+  padding: $sp * 6 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+  font-weight: $font-weight-light;
+  position: relative;
+  height: 8.8rem;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba($black, 0.4);
+    z-index: 1;
+    height: 8.8rem;
+  }
+
+  &__nav {
+    @include flex-between;
+    width: $xl;
+    margin: 0 auto;
+    align-items: center;
+    color: $white;
+    position: relative;
+    z-index: 2;
+
+    &-logo {
+      display: block;
+      font-size: $font-size-base * 3;
+      color: $white;
+    }
+
+    &-toggle {
+      display: none;
+      height: $sp * 6;
+      width: $sp * 10;
+      cursor: pointer;
+      background-image: url("#{$path-img}/icons/menu.svg");
+      @include img-cover;
+
+      &.header__nav-toggle_show {
+        z-index: 2;
+        background-image: url("#{$path-img}/icons/close.svg");
+      }
+    }
+  }
+}
+
+/* /Header styles */

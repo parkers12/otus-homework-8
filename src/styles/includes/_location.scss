@@ -1,0 +1,35 @@
+/* Location styles */
+
+.location {
+  @include flex-column;
+  padding-top: $sp * 20;
+  font-weight: $font-weight-light;
+
+  &__title {
+    text-align: $text-align;
+  }
+
+  &__subtitle {
+    line-height: $line-height + 10;
+    text-align: $text-align;
+    width: $width-content;
+    margin: 2rem auto 0;
+  }
+
+  &__list {
+    @include flex-between;
+    flex-wrap: wrap;
+    margin-top: $sp * 12;
+    overflow: hidden;
+
+    &_block {
+      max-height: 50rem;
+    }
+
+    &_page {
+      max-height: auto;
+    }
+  }
+}
+
+/* Location styles */
