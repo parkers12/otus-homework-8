@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <title>Personal blog</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link href="img/favicon.ico" type="image/x-icon" rel="icon" />
+  <link href="img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+  <link href="styles/styles.css" rel="stylesheet" />
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></>
+  <![endif]-->
+  <script defer src="js/bundle.js"></script>
+</head>
+
+<body>
+  <div class="primary">
+    <div class="primary__content">
+      <header class="header">
+        <div class="header__nav">
+          <a class="header__nav-logo" href="index.html"> Travel blog </a>
+          <div class="header__nav-menu">
+            <nav class="nav-header nav-header_desctop">
+              <a class="nav-header__item" href="index.html">Home</a>
+              <a class="nav-header__item" href="location-page.html">Location</a>
+              <a class="nav-header__item" href="blog-page.html">Blog</a>
+              <a class="nav-header__item" href="about-page.html">About</a>
+              <a class="nav-header__item" href="contacts-page.html">Contact</a>
+            </nav>
+
+          </div>
+          <button class="header__nav-button">Booking now</button>
+          <a class="header__nav-toggle" href="#" id="menuToggle"></a>
+          <div class="mobile-menu" id="mobileMenu">
+            <a class="mobile-menu__logo" href="/"> Travel blog </a>
+            <nav class="nav-header nav-header_mobile">
+              <a class="nav-header__item" href="index.html">Home</a>
+              <a class="nav-header__item" href="location-page.html">Location</a>
+              <a class="nav-header__item" href="blog-page.html">Blog</a>
+              <a class="nav-header__item" href="about-page.html">About</a>
+              <a class="nav-header__item" href="contacts-page.html">Contact</a>
+            </nav>
+
+          </div>
+
+        </div>
+      </header>
+
+      <main class="primary__content-main">
+        <div class="location">
+          <h1 class="location__title">Popular Location</h1>
+          <p class="location__subtitle">
+            For every one of us, travel came first. We’ve spent years living as nomads,
+            pioneers, and voyagers— from island hopping in the
+          </p>
+          <div class="location__list location__list_page">
+            <a class="location-item" href="country-page.html">
+              <div class="location-item__img" style="background-image: url('img/location/cyprus.jpg')"></div>
+              <div class="location-item__data">
+                <h2 class="location-item__data-title">Pafos, Cyprus</h2>
+                <p class="location-item__data-subtitle">Paphos is a coastal city in southwest Cyprus and the capital of Paphos District</p>
+              </div>
+            </a>
+
+            <a class="location-item" href="country-page.html">
+              <div class="location-item__img" style="background-image: url('img/location/czech.jpg')"></div>
+              <div class="location-item__data">
+                <h2 class="location-item__data-title">Prague, Czech</h2>
+                <p class="location-item__data-subtitle">Prague is the capital and largest city in the Czech Republic</p>
+              </div>
+            </a>
+
+            <a class="location-item" href="country-page.html">
+              <div class="location-item__img" style="background-image: url('img/location/france.jpg')"></div>
+              <div class="location-item__data">
+                <h2 class="location-item__data-title">Paris, France</h2>
+                <p class="location-item__data-subtitle">Paris is the capital and most populous city of France</p>
+              </div>
+            </a>
+
+            <a class="location-item" href="country-page.html">
+              <div class="location-item__img" style="background-image: url('img/location/izrael.jpg')"></div>
+              <div class="location-item__data">
+                <h2 class="location-item__data-title">Tel Aviv, Izrael</h2>
+                <p class="location-item__data-subtitle">Tel Aviv-Yafo often referred to as just Tel Aviv, is the most populous city</p>
+              </div>
+            </a>
+
+            <a class="location-item" href="country-page.html">
+              <div class="location-item__img" style="background-image: url('img/location/montenegro.jpg')"></div>
+              <div class="location-item__data">
+                <h2 class="location-item__data-title">Kotor, Montenegro</h2>
+                <p class="location-item__data-subtitle">Kotor is a coastal town in Montenegro</p>
+              </div>
+            </a>
+
+            <a class="location-item" href="country-page.html">
+              <div class="location-item__img" style="background-image: url('img/location/portugal.jpg')"></div>
+              <div class="location-item__data">
+                <h2 class="location-item__data-title">Cabo da Roca, Portugal</h2>
+                <p class="location-item__data-subtitle">Cabo da Roca or Cape Roca is a cape which forms the westernmost point of the Sintra Mountain Range</p>
+              </div>
+            </a>
+
+            <a class="location-item" href="country-page.html">
+              <div class="location-item__img" style="background-image: url('img/location/spain.jpg')"></div>
+              <div class="location-item__data">
+                <h2 class="location-item__data-title">Barcelona, Spain</h2>
+                <p class="location-item__data-subtitle">Barcelona is a city on the coast of northeastern Spain</p>
+              </div>
+            </a>
+
+            <a class="location-item" href="country-page.html">
+              <div class="location-item__img" style="background-image: url('img/location/thailand.jpg')"></div>
+              <div class="location-item__data">
+                <h2 class="location-item__data-title">Phuket, Thailand</h2>
+                <p class="location-item__data-subtitle">Phuket is one of the southern provinces of Thailand</p>
+              </div>
+            </a>
+
+            <a class="location-item" href="country-page.html">
+              <div class="location-item__img" style="background-image: url('img/location/turkey.jpg')"></div>
+              <div class="location-item__data">
+                <h2 class="location-item__data-title">Kemer, Turkey</h2>
+                <p class="location-item__data-subtitle">Kemer is a seaside resort and district of Antalya Province on the Mediterranean coast of Turkey</p>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+      </main>
+    </div>
+    <div class="primary__footer">
+      <footer class="footer">
+        <div class="footer__left">
+          <div class="footer__left-logo">Travel blog</div>
+          <div class="footer__left-contacts">
+            <div class="footer__left-contacts-text">Contact us</div>
+            <a class="footer__left-contacts-email" href="#">@shovasatkhira88.com</a>
+          </div>
+          <div class="footer__left-socials">
+            <nav class="socials">
+              <a class="socials__item socials__item_facebook" href="http://facebook.com" target="_blank"></a>
+              <a class="socials__item socials__item_instagram" href="http://instagram.com" target="_blank"></a>
+              <a class="socials__item socials__item_twitter" href="http://twitter.com" target="_blank"></a>
+              <a class="socials__item socials__item_google" href="http://google.com" target="_blank"></a>
+            </nav>
+          </div>
+        </div>
+        <div class="footer__nav">
+          <nav class="nav-footer">
+            <div class="nav-footer__col">
+              <a class="nav-footer__col-item" href="#">Services</a>
+              <a class="nav-footer__col-item" href="about.html">About</a>
+              <a class="nav-footer__col-item" href="#">Our story</a>
+              <a class="nav-footer__col-item" href="#">Benefits</a>
+              <a class="nav-footer__col-item" href="#">Branding</a>
+            </div>
+            <div class="nav-footer__col">
+              <a class="nav-footer__col-item" href="#">Legal</a>
+              <a class="nav-footer__col-item" href="#">Terms & Conditions</a>
+              <a class="nav-footer__col-item" href="#">Privecy Policy</a>
+              <a class="nav-footer__col-item" href="terms-of-use-page.html">
+                Terms of use
+              </a>
+            </div>
+          </nav>
+        </div>
+        <div class="footer__subscribe">
+          <div class="footer__subscribe-title">SUBSCRIBE NOW</div>
+          <div class="footer__subscribe-form">
+            <input name="subscribe" class="footer__subscribe-form-input" />
+            <button class="footer__subscribe-form-button">Send</button>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+</body>
+
+</html>
