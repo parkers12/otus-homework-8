@@ -7,7 +7,12 @@ import {
   getBullitList,
 } from "./functions";
 
-import * as extraFunctions from "./extraFunctions";
+import {
+  addClassesActive,
+  classDelete,
+  getBullitActive,
+} from "./extraFunctions";
+
 import config from "./config";
 
 const activeSldCls = config.activeSlideClass;
@@ -103,46 +108,73 @@ describe("addFirstSlideActive", () => {
       bullitsList.appendChild(bullitItem);
       bullitItem.setAttribute("class", "slider__bullit-list-item_active");
 
-      const spy1 = jest.spyOn(extraFunctions, "addClassesActive");
-      const spy2 = jest.spyOn(extraFunctions, "classDelete");
-      const spy3 = jest.spyOn(extraFunctions, "getBullitActive");
-      spy1.mockReturnValue("mocked");
-      spy2.mockReturnValue("mocked");
-      spy3.mockReturnValue("mocked");
+      //   const spy1 = jest.spyOn(extraFunctions, "addClassesActive");
+      //   const spy2 = jest.spyOn(extraFunctions, "classDelete");
+      //   const spy3 = jest.spyOn(extraFunctions, "getBullitActive");
+      //   spy1.mockReturnValue("mocked");
+      //   spy2.mockReturnValue("mocked");
+      //   spy3.mockReturnValue("mocked");
+
+      // const mockAddClassesActive = jest.fn();
+      // const mockClassDelete = jest.fn();
+      // const mockGetBullitActive = jest.fn();
+
+      // const mockAddClassesActive = jest.fn();
+
+      jest.mock("./extraFunctions", () => jest.fn().mockImplementation(() => ({
+            addClassesActive: () => {},
+            classDelete: () => {},
+            getBullitActive: () => {},
+          })));
 
       describe("getNextSlide", () => {
-        it("add classes to show the next slide", () => {
-          expect(getNextSlide(2, itemsNextSlide, bullitsList, "")).toBe("true");
+        it("add classes to show the next slide 1", () => {
+          getNextSlide(2, itemsNextSlide, bullitsList, "");
+          expect(addClassesActive).toHaveBeenCalled();
+          expect(classDelete).toHaveBeenCalled();
+          expect(getBullitActive).toHaveBeenCalled();
         });
       });
 
       describe("getPrevSlide", () => {
-        it("add classes to show the next slide", () => {
-          expect(getPrevSlide(1, itemsNextSlide, bullitsList, "")).toBe("true");
+        it("add classes to show the next slide 2", () => {
+          getPrevSlide(1, itemsNextSlide, bullitsList, "");
+          expect(addClassesActive).toHaveBeenCalled();
+          expect(classDelete).toHaveBeenCalled();
+          expect(getBullitActive).toHaveBeenCalled();
         });
       });
 
       describe("getPrevSlide", () => {
-        it("add classes to show the next slide", () => {
-          expect(getPrevSlide(2, itemsNextSlide, bullitsList, 5)).toBe("true");
+        it("add classes to show the next slide 3", () => {
+          getPrevSlide(2, itemsNextSlide, bullitsList, 5);
+          expect(addClassesActive).toHaveBeenCalled();
+          expect(classDelete).toHaveBeenCalled();
+          expect(getBullitActive).toHaveBeenCalled();
         });
       });
 
       describe("getPrevSlide", () => {
-        it("add classes to show the next slide", () => {
-          expect(getPrevSlide(4, itemsNextSlide, bullitsList, "")).toBe("true");
+        it("add classes to show the next slide 4", () => {
+          getPrevSlide(4, itemsNextSlide, bullitsList, "");
+          expect(addClassesActive).toHaveBeenCalled();
+          expect(classDelete).toHaveBeenCalled();
+          expect(getBullitActive).toHaveBeenCalled();
         });
       });
 
       describe("getPrevSlide", () => {
-        it("add classes to show the next slide", () => {
-          expect(getPrevSlide(0, itemsNextSlide, bullitsList, "")).toBe("true");
+        it("add classes to show the next slide 5", () => {
+          getPrevSlide(0, itemsNextSlide, bullitsList, "");
+          expect(addClassesActive).toHaveBeenCalled();
+          expect(classDelete).toHaveBeenCalled();
+          expect(getBullitActive).toHaveBeenCalled();
         });
       });
 
-      spy1.mockRestore();
-      spy2.mockRestore();
-      spy3.mockRestore();
+      //   spy1.mockRestore();
+      //   spy2.mockRestore();
+      //   spy3.mockRestore();
       bullitsList.innerHTML = "";
     });
   });
