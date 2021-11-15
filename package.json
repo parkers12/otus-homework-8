@@ -10,7 +10,8 @@
     "prepare": "husky install",
     "build": "webpack --node-env development",
     "dev": "webpack serve",
-    "stylelint-check": "stylelint-config-prettier-check"
+    "stylelint-check": "stylelint-config-prettier-check",
+    "clear_jest": "jest --clearCache"
   },
   "repository": {
     "type": "git",

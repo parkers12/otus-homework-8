@@ -1,13 +1,12 @@
 import "../styles/styles.scss";
 
-function startFunction() {
-  const mobileMenu = document.getElementById("mobileMenu");
-  const menuToggle = document.getElementById("menuToggle");
+import { mobileToggleMenu } from "./mobileToggleMenu";
 
-  menuToggle.addEventListener("click", () => {
-    mobileMenu.classList.toggle("mobile-menu_show");
-    menuToggle.classList.toggle("header__nav-toggle_show");
-  });
+import { sliderJS } from "./slider/slider";
+
+function startFunction() {
+  mobileToggleMenu();
+  sliderJS();
 }
 
 document.addEventListener("DOMContentLoaded", startFunction());

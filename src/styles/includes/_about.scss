@@ -2,6 +2,7 @@
 
 .about {
   @include flex-column;
+
   padding-top: $sp * 20;
   font-weight: $font-weight-light;
 

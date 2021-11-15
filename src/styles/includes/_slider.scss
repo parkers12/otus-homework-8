@@ -1,37 +1,340 @@
 /* Slider styles */
+$animationSlider: 1s;
 
 .slider {
-  @include flex-column;
-  background: linear-gradient(rgba($black, 0.2), rgba($black, 0.5)),
-    url("#{$path-img}/bg.jpg");
-  padding: $sp * 15 0;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top;
-  font-weight: $font-weight-light;
+  width: 100%;
+  height: 60rem;
+  position: relative;
+  overflow: hidden;
 
-  &__name {
-    width: $xl;
-    margin: 0 auto;
-    color: $white;
+  &__list {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 
-    &-title {
-      font-size: $font-size-base * 4;
-      line-height: $line-height - 30;
-      max-width: 40rem;
+    &-item {
+      margin: 0;
+      opacity: 1;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: none;
+      z-index: 0;
+
+      &.active {
+        display: block;
+        z-index: 1;
+      }
+
+      &.next,
+      &.prev {
+        position: absolute;
+        top: 0;
+      }
+
+      &.next {
+        animation: next $animationSlider;
+        z-index: 3;
+
+        &.back {
+          animation: prev $animationSlider reverse forwards;
+        }
+      }
+
+      &.prev {
+        animation: prev $animationSlider;
+        z-index: 2;
+
+        &.back {
+          animation: next $animationSlider reverse forwards;
+        }
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  &__arrows {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &-left,
+    &-right,
+    &-center {
+      position: absolute;
+      top: calc(50% - $sp * 10);
+      transform: translateY(-50%);
+      width: $sp * 12;
+      height: $sp * 12;
+      z-index: 10;
+      cursor: pointer;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($white, 0.2);
+        border-radius: 50%;
+        z-index: 8;
+        transition: $transition;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 60%;
+        height: 60%;
+        z-index: 9;
+        opacity: 0.4;
+        transform: translateX(-50%) translateY(-50%);
+        transition: $transition;
+      }
+
+      &:hover {
+        &:before {
+          background-color: rgba($white, 0.4);
+        }
+
+        &:after {
+          opacity: 0.8;
+        }
+      }
     }
 
-    &-subtitle {
-      font-size: $font-size-second;
-      line-height: $line-height + 10;
-      margin-top: $sp * 8;
-      max-width: 36rem;
-      opacity: $opacity-middle;
+    &-left,
+    &-right {
+      &:after {
+        background-image: url("#{$path-img}/icons/arrow.svg");
+      }
     }
 
-    &-button {
-      margin-top: $sp * 20;
+    &-left {
+      left: $sp * 10;
+      transform: rotate(270deg);
     }
+
+    &-right {
+      right: $sp * 10;
+      transform: rotate(90deg);
+    }
+
+    &-center {
+      top: initial;
+      bottom: $sp * 8;
+      right: $sp * 12;
+      transform: translateY(0%);
+
+      &:after {
+        background-image: url("#{$path-img}/icons/pause.svg");
+      }
+
+      &.stop {
+        &:after {
+          left: calc(50% + 3px);
+          background-image: url("#{$path-img}/icons/play.svg");
+        }
+      }
+    }
+  }
+
+  &__bullit-list {
+    position: absolute;
+    bottom: $sp * 8;
+    left: 50%;
+    z-index: 11;
+    display: flex;
+    transform: translateX(-50%);
+
+    &-item {
+      width: $sp * 3;
+      height: $sp * 3;
+      border-radius: 50%;
+      border: 0.2rem solid rgba($white, 0.4);
+      cursor: pointer;
+      transition: $transition;
+      position: relative;
+
+      &:hover {
+        border-color: rgba($white, 0.8);
+      }
+
+      & + & {
+        margin-left: $sp * 4;
+      }
+
+      &_active {
+        position: absolute;
+        top: 50%;
+        left: -3px;
+        width: $sp * 1.5;
+        height: $sp * 1.5;
+        border-radius: 50%;
+        background-color: rgba($white, 0.4);
+        cursor: default;
+        transform: translateY(-50%) translateX(-50%);
+        transition: $transition;
+        animation: move $animationSlider;
+        animation-fill-mode: forwards;
+      }
+
+      // &.active {
+      //   &:before {
+      //     content: "";
+      //     position: absolute;
+      //     top: 50%;
+      //     left: 50%;
+      //     width: $sp * 1.5;
+      //     height: $sp * 1.5;
+      //     border-radius: 50%;
+      //     background-color: rgba($white, 0.4);
+      //     cursor: default;
+      //     transform: translateY(-50%) translateX(-50%);
+      //     transition: $transition;
+      //   }
+
+      //   &.move {
+      //     &:before {
+      //       animation: move $animationSlider;
+      //       animation-fill-mode: forwards;
+      //     }
+      //   }
+
+      //   &.back {
+      //     &:before {
+      //       animation: back $animationSlider;
+      //       animation-fill-mode: forwards;
+      //     }
+      //   }
+
+      //   &.toFirst {
+      //     &:before {
+      //       animation: toFirst $animationSlider;
+      //       animation-fill-mode: forwards;
+      //     }
+      //   }
+
+      //   &.toLast {
+      //     &:before {
+      //       animation: toLast $animationSlider;
+      //       animation-fill-mode: forwards;
+      //     }
+      //   }
+      // }
+    }
+  }
+}
+
+@keyframes next {
+  0% {
+    transform: translate(100%, 0);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translate(50%, 0);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes prev {
+  0% {
+    transform: translate(0, 0);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translate(-50%, 0);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+/*
+@keyframes move {
+  0% {
+      transform: translate(-3px, -3px);
+      animation-timing-function: ease-in;
+  }
+  50% {
+      transform: translate(12px, -3px);
+      animation-timing-function: ease-out;
+  }
+  100% {
+      transform: translate(25px, -3px);
+  }
+}
+
+*/
+@keyframes move {
+  0% {
+    transform: translate(0%, -3px);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translate(50%, -3px);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translate(100%, -3px);
+  }
+}
+
+@keyframes back {
+  0% {
+    transform: translate(25px, -3px);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translate(12px, -3px);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translate(-3px, -3px);
+  }
+}
+
+@keyframes toFirst {
+  0% {
+    transform: translate(-3px, -3px);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translate(-114px, -3px);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translate(-227px, -3px);
+  }
+}
+
+@keyframes toLast {
+  0% {
+    transform: translate(-227px, -3px);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: translate(-114px, -3px);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translate(-3px, -3px);
   }
 }
 
