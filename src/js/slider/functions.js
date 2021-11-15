@@ -47,27 +47,34 @@ export function getNextSlide(
     nextElem = targetSlide;
   }
 
-  const classesAdd = `${activeSldCls} ${nextSldCls}`.split(" ");
-  const classes = `${activeSldCls} ${prevSldCls}`.split(" ");
+  const currentItem = arr[getNumberActive(arr)];
+  if (
+    !currentItem.classList.contains(config.nextSlideClass) &&
+    !currentItem.classList.contains(config.prevSlideClass)
+  ) {
+    const classesAdd = `${activeSldCls} ${nextSldCls}`.split(" ");
+    const classes = `${activeSldCls} ${prevSldCls}`.split(" ");
 
-  addClassesActive(numderActiveSlide, nextElem, classesAdd, classes, arr);
+    addClassesActive(numderActiveSlide, nextElem, classesAdd, classes, arr);
 
-  const classesAll = `${activeSldCls} ${prevSldCls} ${nextSldCls}`.split(" ");
+    const classesAll = `${activeSldCls} ${prevSldCls} ${nextSldCls}`.split(" ");
 
-  setTimeout(
-    classDelete,
-    config.slideAnimationTime * 1000 + 100,
-    classesAll,
-    nextSldCls,
-    arr[numderActiveSlide],
-    nextElem,
-    arr
-  );
+    setTimeout(
+      classDelete,
+      config.slideAnimationTime * 1000 + 100,
+      classesAll,
+      nextSldCls,
+      arr[numderActiveSlide],
+      nextElem,
+      arr
+    );
 
-  if (sliderBullit !== "") {
-    getBullitActive(sliderBullit, nextElem);
+    if (sliderBullit !== "") {
+      getBullitActive(sliderBullit, nextElem);
+    }
+    return true;
   }
-  return true;
+  return false;
 }
 
 export function getPrevSlide(
@@ -86,28 +93,35 @@ export function getPrevSlide(
     nextElem = targetSlide;
   }
 
-  const classesAdd = `${activeSldCls} ${nextSldCls} ${backBltCls}`.split(" ");
-  const classes = `${backBltCls} ${prevSldCls}`.split(" ");
+  const currentItem = arr[getNumberActive(arr)];
+  if (
+    !currentItem.classList.contains(config.nextSlideClass) &&
+    !currentItem.classList.contains(config.prevSlideClass)
+  ) {
+    const classesAdd = `${activeSldCls} ${nextSldCls} ${backBltCls}`.split(" ");
+    const classes = `${backBltCls} ${prevSldCls}`.split(" ");
 
-  addClassesActive(numderActiveSlide, nextElem, classesAdd, classes, arr);
+    addClassesActive(numderActiveSlide, nextElem, classesAdd, classes, arr);
 
-  const classesAll =
-    `${activeSldCls} ${prevSldCls} ${nextSldCls} ${backBltCls}`.split(" ");
-  const classesDel = `${prevSldCls} ${nextSldCls} ${backBltCls}`.split(" ");
-  setTimeout(
-    classDelete,
-    config.slideAnimationTime * 1000 + 100,
-    classesAll,
-    classesDel,
-    arr[numderActiveSlide],
-    nextElem,
-    arr
-  );
+    const classesAll =
+      `${activeSldCls} ${prevSldCls} ${nextSldCls} ${backBltCls}`.split(" ");
+    const classesDel = `${prevSldCls} ${nextSldCls} ${backBltCls}`.split(" ");
+    setTimeout(
+      classDelete,
+      config.slideAnimationTime * 1000 + 100,
+      classesAll,
+      classesDel,
+      arr[numderActiveSlide],
+      nextElem,
+      arr
+    );
 
-  if (sliderBullit !== "") {
-    getBullitActive(sliderBullit, nextElem);
+    if (sliderBullit !== "") {
+      getBullitActive(sliderBullit, nextElem);
+    }
+    return true;
   }
-  return true;
+  return false;
 }
 
 export function getBullitList(num, slider) {
