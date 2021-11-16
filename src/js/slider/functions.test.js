@@ -121,14 +121,44 @@ describe("addFirstSlideActive", () => {
 
       // const mockAddClassesActive = jest.fn();
 
-      jest.mock("./extraFunctions", () => jest.fn().mockImplementation(() => ({
-            addClassesActive: () => {},
-            classDelete: () => {},
-            getBullitActive: () => {},
-          })));
+      jest.mock("./extraFunctions", () => ({
+        addClassesActive: jest.fn(),
+        classDelete: jest.fn(),
+        getBullitActive: jest.fn(),
+      }));
 
       describe("getNextSlide", () => {
-        it("add classes to show the next slide 1", () => {
+        it("go from slide 2 to slide 5", () => {
+          getNextSlide(2, itemsNextSlide, bullitsList, 4);
+          const classAct = itemsNextSlide[4].classList.contains(
+            config.activeSlideClass
+          );
+          expect(classAct).toBe(true);
+        });
+      });
+
+      describe("getNextSlide", () => {
+        it("go from last slide to first", () => {
+          getPrevSlide(4, itemsNextSlide, bullitsList, "");
+          const classAct = itemsNextSlide[0].classList.contains(
+            config.activeSlideClass
+          );
+          expect(classAct).toBe(true);
+        });
+      });
+
+      describe("getPrevSlide", () => {
+        it("go from first slide to last", () => {
+          getPrevSlide(0, itemsNextSlide, bullitsList, "");
+          const classAct = itemsNextSlide[4].classList.contains(
+            config.activeSlideClass
+          );
+          expect(classAct).toBe(true);
+        });
+      });
+
+      describe("getNextSlide", () => {
+        it("subfunction call to getNextSlide", () => {
           getNextSlide(2, itemsNextSlide, bullitsList, "");
           expect(addClassesActive).toHaveBeenCalled();
           expect(classDelete).toHaveBeenCalled();
@@ -137,7 +167,7 @@ describe("addFirstSlideActive", () => {
       });
 
       describe("getPrevSlide", () => {
-        it("add classes to show the next slide 2", () => {
+        it("subfunction call to getPrevSlide", () => {
           getPrevSlide(1, itemsNextSlide, bullitsList, "");
           expect(addClassesActive).toHaveBeenCalled();
           expect(classDelete).toHaveBeenCalled();
@@ -145,36 +175,6 @@ describe("addFirstSlideActive", () => {
         });
       });
 
-      describe("getPrevSlide", () => {
-        it("add classes to show the next slide 3", () => {
-          getPrevSlide(2, itemsNextSlide, bullitsList, 5);
-          expect(addClassesActive).toHaveBeenCalled();
-          expect(classDelete).toHaveBeenCalled();
-          expect(getBullitActive).toHaveBeenCalled();
-        });
-      });
-
-      describe("getPrevSlide", () => {
-        it("add classes to show the next slide 4", () => {
-          getPrevSlide(4, itemsNextSlide, bullitsList, "");
-          expect(addClassesActive).toHaveBeenCalled();
-          expect(classDelete).toHaveBeenCalled();
-          expect(getBullitActive).toHaveBeenCalled();
-        });
-      });
-
-      describe("getPrevSlide", () => {
-        it("add classes to show the next slide 5", () => {
-          getPrevSlide(0, itemsNextSlide, bullitsList, "");
-          expect(addClassesActive).toHaveBeenCalled();
-          expect(classDelete).toHaveBeenCalled();
-          expect(getBullitActive).toHaveBeenCalled();
-        });
-      });
-
-      //   spy1.mockRestore();
-      //   spy2.mockRestore();
-      //   spy3.mockRestore();
       bullitsList.innerHTML = "";
     });
   });
