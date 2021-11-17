@@ -108,11 +108,13 @@ describe("addFirstSlideActive", () => {
       const mockClassDelete = jest.fn();
       const mockGetBullitActive = jest.fn();
 
-      jest.mock("./extraFunctions", () => jest.fn().mockImplementation(() => ({
-            addClassesActive: mockAddClassesActive,
-            classDelete: mockClassDelete,
-            getBullitActive: mockGetBullitActive,
-          })));
+      jest.mock("./extraFunctions", () =>
+        jest.fn().mockImplementation(() => ({
+          addClassesActive: mockAddClassesActive,
+          classDelete: mockClassDelete,
+          getBullitActive: mockGetBullitActive,
+        }))
+      );
 
       describe("getNextSlide", () => {
         it("go from slide 2 to slide 5", () => {
