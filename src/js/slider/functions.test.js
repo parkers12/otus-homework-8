@@ -7,11 +7,7 @@ import {
   getBullitList,
 } from "./functions";
 
-import {
-  addClassesActive,
-  classDelete,
-  getBullitActive,
-} from "./extraFunctions";
+// import extraFunctions from "./extraFunctions";
 
 import config from "./config";
 
@@ -108,24 +104,15 @@ describe("addFirstSlideActive", () => {
       bullitsList.appendChild(bullitItem);
       bullitItem.setAttribute("class", "slider__bullit-list-item_active");
 
-      //   const spy1 = jest.spyOn(extraFunctions, "addClassesActive");
-      //   const spy2 = jest.spyOn(extraFunctions, "classDelete");
-      //   const spy3 = jest.spyOn(extraFunctions, "getBullitActive");
-      //   spy1.mockReturnValue("mocked");
-      //   spy2.mockReturnValue("mocked");
-      //   spy3.mockReturnValue("mocked");
+      const mockAddClassesActive = jest.fn();
+      const mockClassDelete = jest.fn();
+      const mockGetBullitActive = jest.fn();
 
-      // const mockAddClassesActive = jest.fn();
-      // const mockClassDelete = jest.fn();
-      // const mockGetBullitActive = jest.fn();
-
-      // const mockAddClassesActive = jest.fn();
-
-      jest.mock("./extraFunctions", () => ({
-        addClassesActive: jest.fn(),
-        classDelete: jest.fn(),
-        getBullitActive: jest.fn(),
-      }));
+      jest.mock("./extraFunctions", () => jest.fn().mockImplementation(() => ({
+            addClassesActive: mockAddClassesActive,
+            classDelete: mockClassDelete,
+            getBullitActive: mockGetBullitActive,
+          })));
 
       describe("getNextSlide", () => {
         it("go from slide 2 to slide 5", () => {
@@ -160,18 +147,18 @@ describe("addFirstSlideActive", () => {
       describe("getNextSlide", () => {
         it("subfunction call to getNextSlide", () => {
           getNextSlide(2, itemsNextSlide, bullitsList, "");
-          expect(addClassesActive).toHaveBeenCalled();
-          expect(classDelete).toHaveBeenCalled();
-          expect(getBullitActive).toHaveBeenCalled();
+          expect(mockAddClassesActive).toHaveBeenCalled();
+          expect(mockClassDelete).toHaveBeenCalled();
+          expect(mockGetBullitActive).toHaveBeenCalled();
         });
       });
 
       describe("getPrevSlide", () => {
         it("subfunction call to getPrevSlide", () => {
           getPrevSlide(1, itemsNextSlide, bullitsList, "");
-          expect(addClassesActive).toHaveBeenCalled();
-          expect(classDelete).toHaveBeenCalled();
-          expect(getBullitActive).toHaveBeenCalled();
+          expect(mockAddClassesActive).toHaveBeenCalled();
+          expect(mockClassDelete).toHaveBeenCalled();
+          expect(mockGetBullitActive).toHaveBeenCalled();
         });
       });
 
