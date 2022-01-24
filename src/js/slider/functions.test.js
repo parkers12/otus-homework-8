@@ -3,18 +3,35 @@ import {
   addFirstSlideActive,
   getNumberActive,
   getNextSlide,
-  getPrevSlide,
+  // getPrevSlide,
   getBullitList,
 } from "./functions";
 
-// import extraFunctions from "./extraFunctions";
-
 import config from "./config";
+
+import {
+  addClassesActive,
+  // classDelete,
+  // getBullitActive,
+} from "./extraFunctions";
+
+jest.mock("./extraFunctions", () => {
+  const originalModule = jest.requireActual("./extraFunctions");
+  return {
+    __esModule: true,
+    ...originalModule,
+    addClassesActive: jest.fn(),
+    classDelete: jest.fn(),
+    getBullitActive: jest.fn(),
+  };
+});
 
 const activeSldCls = config.activeSlideClass;
 const sliderBullitId = config.sliderBullit;
+// const activeSlPr = config.prevSlideClass;
+// const activeSlNx = config.nextSlideClass;
 
-describe("addFirstSlideActive", () => {
+describe("Plugin Slider", () => {
   afterAll(() => {
     document.body.innerHTML = "";
   });
@@ -47,7 +64,7 @@ describe("addFirstSlideActive", () => {
     });
 
     describe("getNumberActive", () => {
-      const activeItem = 2;
+      const activeItem = 1;
       const itemsToGetNumber = [...sliderList.querySelectorAll("li")];
       it("return the number of the active list item", () => {
         itemsToGetNumber[0].classList.remove(activeSldCls);
@@ -55,10 +72,11 @@ describe("addFirstSlideActive", () => {
         const activeElement = getNumberActive(itemsToGetNumber);
         expect(activeElement).toBe(activeItem);
       });
-      it("return zero if there is no active element", () => {
+      it("return -1 if there is no active element", () => {
+        itemsToGetNumber[activeItem - 1].classList.remove(activeSldCls);
         itemsToGetNumber[activeItem].classList.remove(activeSldCls);
         const activeElement = getNumberActive(itemsToGetNumber);
-        expect(activeElement).toBe(false);
+        expect(activeElement).toBe(-1);
       });
     });
 
@@ -88,81 +106,77 @@ describe("addFirstSlideActive", () => {
       });
     });
 
-    describe("getNextSlide", () => {
+    describe("getNextPrevSlide", () => {
       const bullitsList = document.getElementById(sliderBullitId);
       const itemsNextSlide = [...sliderList.querySelectorAll("li")];
+      const numberSlTest = 1;
+      const numberNtTest = 4;
 
       for (let i = 0; i < 5; i += 1) {
         const bullitItem = document.createElement("div");
-        bullitsList.appendChild(bullitItem);
         const item = `bullit-${i}`;
         bullitItem.setAttribute("id", item);
         bullitItem.setAttribute("class", "slider__bullit-list-item");
+        bullitsList.appendChild(bullitItem);
       }
 
       const bullitItem = document.createElement("div");
-      bullitsList.appendChild(bullitItem);
       bullitItem.setAttribute("class", "slider__bullit-list-item_active");
+      bullitsList.appendChild(bullitItem);
 
-      const mockAddClassesActive = jest.fn();
-      const mockClassDelete = jest.fn();
-      const mockGetBullitActive = jest.fn();
+      describe("getSlide", () => {
+        itemsNextSlide[numberSlTest].classList.add(activeSldCls);
 
-      jest.mock("./extraFunctions", () =>
-        jest.fn().mockImplementation(() => ({
-          addClassesActive: mockAddClassesActive,
-          classDelete: mockClassDelete,
-          getBullitActive: mockGetBullitActive,
-        }))
-      );
+        getNextSlide(numberSlTest, itemsNextSlide, bullitsList, numberNtTest);
+        const classAct = itemsNextSlide[4].classList.contains(
+          config.activeSlideClass
+        );
 
-      describe("getNextSlide", () => {
         it("go from slide 2 to slide 5", () => {
-          getNextSlide(2, itemsNextSlide, bullitsList, 4);
-          const classAct = itemsNextSlide[4].classList.contains(
-            config.activeSlideClass
-          );
+          expect(addClassesActive).toHaveBeenCalled();
+          // expect(classDelete).toHaveBeenCalled();
+          // expect(getBullitActive).toHaveBeenCalled();
           expect(classAct).toBe(true);
         });
       });
 
-      describe("getNextSlide", () => {
-        it("go from last slide to first", () => {
-          getPrevSlide(4, itemsNextSlide, bullitsList, "");
-          const classAct = itemsNextSlide[0].classList.contains(
-            config.activeSlideClass
-          );
-          expect(classAct).toBe(true);
-        });
-      });
+      // describe("getNextSlide", () => {
+      //   it("go from last slide to first", () => {
+      //     getPrevSlide(4, itemsNextSlide, bullitsList, "");
+      //     const classAct = itemsNextSlide[0].classList.contains(
+      //       config.activeSlideClass
+      //     );
+      //     expect(classAct).toBe(true);
+      //   });
+      // });
 
-      describe("getPrevSlide", () => {
-        it("go from first slide to last", () => {
-          getPrevSlide(0, itemsNextSlide, bullitsList, "");
-          const classAct = itemsNextSlide[4].classList.contains(
-            config.activeSlideClass
-          );
-          expect(classAct).toBe(true);
-        });
-      });
+      // describe("getPrevSlide", () => {
+      //   it("go from first slide to last", () => {
+      //     getPrevSlide(0, itemsNextSlide, bullitsList, "");
+      //     const classAct = itemsNextSlide[4].classList.contains(
+      //       config.activeSlideClass
+      //     );
+      //     expect(classAct).toBe(true);
+      //   });
+      // });
 
-      describe("getNextSlide", () => {
-        it("subfunction call to getNextSlide", () => {
-          getNextSlide(2, itemsNextSlide, bullitsList, "");
-          expect(mockAddClassesActive).toHaveBeenCalled();
-          expect(mockClassDelete).toHaveBeenCalled();
-          expect(mockGetBullitActive).toHaveBeenCalled();
-        });
-      });
+      // describe("getNextSlide", () => {
+      //   it("subfunction call to getNextSlide", () => {
+      //     getNextSlide(2, itemsNextSlide, bullitsList, "");
+      //     expect(mockAddClassesActive).toHaveBeenCalled();
+      //     expect(mockClassDelete).toHaveBeenCalled();
+      //     expect(mockGetBullitActive).toHaveBeenCalled();
+      //   });
+      // });
 
-      describe("getPrevSlide", () => {
-        it("subfunction call to getPrevSlide", () => {
-          getPrevSlide(1, itemsNextSlide, bullitsList, "");
-          expect(mockAddClassesActive).toHaveBeenCalled();
-          expect(mockClassDelete).toHaveBeenCalled();
-          expect(mockGetBullitActive).toHaveBeenCalled();
-        });
-      });
+      // describe("getPrevSlide", () => {
+      //   it("subfunction call to getPrevSlide", () => {
+      //     getPrevSlide(1, itemsNextSlide, bullitsList, "");
+      //     expect(mockAddClassesActive).toHaveBeenCalled();
+      //     expect(mockClassDelete).toHaveBeenCalled();
+      //     expect(mockGetBullitActive).toHaveBeenCalled();
+      //   });
+      // });
 
       bullitsList.innerHTML = "";
     });

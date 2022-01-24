@@ -22,13 +22,15 @@ export function addFirstSlideActive(firstItem) {
 }
 
 export function getNumberActive(arr) {
+  let actElem = -1;
   for (let i = 0; i < arr.length; i += 1) {
     const elem = arr[i].className;
     if (elem !== "" && elem.indexOf(activeSldCls) > 0) {
-      return i;
+      actElem = i;
+      break;
     }
   }
-  return false;
+  return actElem;
 }
 
 export function getNextSlide(
@@ -47,7 +49,8 @@ export function getNextSlide(
     nextElem = targetSlide;
   }
 
-  const currentItem = arr[getNumberActive(arr)];
+  const numAct = getNumberActive(arr);
+  const currentItem = arr[numAct];
   if (
     !currentItem.classList.contains(config.nextSlideClass) &&
     !currentItem.classList.contains(config.prevSlideClass)
