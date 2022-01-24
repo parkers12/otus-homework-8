@@ -3,7 +3,7 @@ import {
   addFirstSlideActive,
   getNumberActive,
   getNextSlide,
-  // getPrevSlide,
+  getPrevSlide,
   getBullitList,
 } from "./functions";
 
@@ -11,8 +11,8 @@ import config from "./config";
 
 import {
   addClassesActive,
-  // classDelete,
-  // getBullitActive,
+  classDelete,
+  getBullitActive,
 } from "./extraFunctions";
 
 jest.mock("./extraFunctions", () => {
@@ -28,8 +28,7 @@ jest.mock("./extraFunctions", () => {
 
 const activeSldCls = config.activeSlideClass;
 const sliderBullitId = config.sliderBullit;
-// const activeSlPr = config.prevSlideClass;
-// const activeSlNx = config.nextSlideClass;
+const nexrSldCls = config.nextSlideClass;
 
 describe("Plugin Slider", () => {
   afterAll(() => {
@@ -125,58 +124,141 @@ describe("Plugin Slider", () => {
       bullitsList.appendChild(bullitItem);
 
       describe("getSlide", () => {
-        itemsNextSlide[numberSlTest].classList.add(activeSldCls);
-
-        getNextSlide(numberSlTest, itemsNextSlide, bullitsList, numberNtTest);
-        const classAct = itemsNextSlide[4].classList.contains(
-          config.activeSlideClass
-        );
-
         it("go from slide 2 to slide 5", () => {
+          itemsNextSlide[numberSlTest].classList.add(activeSldCls);
+          getNextSlide(numberSlTest, itemsNextSlide, bullitsList, numberNtTest);
+          const classAct = itemsNextSlide[numberNtTest].classList.contains(
+            config.activeSlideClass
+          );
           expect(addClassesActive).toHaveBeenCalled();
-          // expect(classDelete).toHaveBeenCalled();
-          // expect(getBullitActive).toHaveBeenCalled();
+          setTimeout(() => {
+            expect(classDelete).toHaveBeenCalled();
+          }, 1000);
+          expect(getBullitActive).toHaveBeenCalled();
+          expect(classAct).toBe(false);
+        });
+      });
+
+      describe("getSlide", () => {
+        it("go from last slide to first", () => {
+          itemsNextSlide[itemsNextSlide.length - 1].classList.add(activeSldCls);
+          getNextSlide(0, itemsNextSlide, bullitsList, numberNtTest);
+          expect(addClassesActive).toHaveBeenCalled();
+          setTimeout(() => {
+            expect(classDelete).toHaveBeenCalled();
+          }, 1000);
+          expect(getBullitActive).toHaveBeenCalled();
+        });
+      });
+
+      describe("getSlide", () => {
+        it("go from last slide to first", () => {
+          itemsNextSlide[itemsNextSlide.length - 1].classList.add(activeSldCls);
+          getNextSlide(numberNtTest, itemsNextSlide, bullitsList, "");
+          expect(addClassesActive).toHaveBeenCalled();
+          setTimeout(() => {
+            expect(classDelete).toHaveBeenCalled();
+          }, 1000);
+          expect(getBullitActive).toHaveBeenCalled();
+        });
+      });
+
+      describe("getSlide", () => {
+        it("go from last slide to first", () => {
+          itemsNextSlide[numberSlTest].classList.add(activeSldCls);
+          getNextSlide(numberSlTest, itemsNextSlide, bullitsList, "");
+          expect(addClassesActive).toHaveBeenCalled();
+          setTimeout(() => {
+            expect(classDelete).toHaveBeenCalled();
+          }, 1000);
+          expect(getBullitActive).toHaveBeenCalled();
+        });
+      });
+
+      describe("getPrevSlide", () => {
+        it("go from last slide to first", () => {
+          itemsNextSlide[itemsNextSlide.length - 1].classList.add(activeSldCls);
+          getPrevSlide(0, itemsNextSlide, bullitsList, numberNtTest);
+          const classAct = itemsNextSlide[numberNtTest].classList.contains(
+            config.activeSlideClass
+          );
+          expect(addClassesActive).toHaveBeenCalled();
+          setTimeout(() => {
+            expect(classDelete).toHaveBeenCalled();
+          }, 1000);
+          expect(getBullitActive).toHaveBeenCalled();
           expect(classAct).toBe(true);
         });
       });
 
-      // describe("getNextSlide", () => {
-      //   it("go from last slide to first", () => {
-      //     getPrevSlide(4, itemsNextSlide, bullitsList, "");
-      //     const classAct = itemsNextSlide[0].classList.contains(
-      //       config.activeSlideClass
-      //     );
-      //     expect(classAct).toBe(true);
-      //   });
-      // });
+      describe("getPrevSlide", () => {
+        it("go from first slide to last", () => {
+          itemsNextSlide[0].classList.add(activeSldCls);
+          getPrevSlide(
+            itemsNextSlide.length - 1,
+            itemsNextSlide,
+            bullitsList,
+            0
+          );
+          const classAct = itemsNextSlide[numberNtTest].classList.contains(
+            config.activeSlideClass
+          );
+          expect(addClassesActive).toHaveBeenCalled();
+          setTimeout(() => {
+            expect(classDelete).toHaveBeenCalled();
+          }, 1000);
+          expect(getBullitActive).toHaveBeenCalled();
+          expect(classAct).toBe(true);
+        });
+      });
 
-      // describe("getPrevSlide", () => {
-      //   it("go from first slide to last", () => {
-      //     getPrevSlide(0, itemsNextSlide, bullitsList, "");
-      //     const classAct = itemsNextSlide[4].classList.contains(
-      //       config.activeSlideClass
-      //     );
-      //     expect(classAct).toBe(true);
-      //   });
-      // });
+      describe("getPrevSlide", () => {
+        it("go from first slide to last", () => {
+          itemsNextSlide[0].classList.add(activeSldCls);
+          getPrevSlide(0, itemsNextSlide, bullitsList, "");
+          const classAct = itemsNextSlide[numberNtTest].classList.contains(
+            config.activeSlideClass
+          );
+          expect(addClassesActive).toHaveBeenCalled();
+          setTimeout(() => {
+            expect(classDelete).toHaveBeenCalled();
+          }, 1000);
+          expect(getBullitActive).toHaveBeenCalled();
+          expect(classAct).toBe(true);
+        });
+      });
 
-      // describe("getNextSlide", () => {
-      //   it("subfunction call to getNextSlide", () => {
-      //     getNextSlide(2, itemsNextSlide, bullitsList, "");
-      //     expect(mockAddClassesActive).toHaveBeenCalled();
-      //     expect(mockClassDelete).toHaveBeenCalled();
-      //     expect(mockGetBullitActive).toHaveBeenCalled();
-      //   });
-      // });
+      describe("getPrevSlide", () => {
+        it("go from first slide to last", () => {
+          itemsNextSlide[numberSlTest].classList.add(activeSldCls);
+          getPrevSlide(numberSlTest, itemsNextSlide, bullitsList, "");
+          const classAct = itemsNextSlide[numberNtTest].classList.contains(
+            config.activeSlideClass
+          );
+          expect(addClassesActive).toHaveBeenCalled();
+          setTimeout(() => {
+            expect(classDelete).toHaveBeenCalled();
+          }, 1000);
+          expect(getBullitActive).toHaveBeenCalled();
+          expect(classAct).toBe(true);
+        });
+      });
 
-      // describe("getPrevSlide", () => {
-      //   it("subfunction call to getPrevSlide", () => {
-      //     getPrevSlide(1, itemsNextSlide, bullitsList, "");
-      //     expect(mockAddClassesActive).toHaveBeenCalled();
-      //     expect(mockClassDelete).toHaveBeenCalled();
-      //     expect(mockGetBullitActive).toHaveBeenCalled();
-      //   });
-      // });
+      describe("getSlide", () => {
+        it("not work getNextSlide", () => {
+          itemsNextSlide[0].classList.add(nexrSldCls);
+          const res = getNextSlide(0, itemsNextSlide, bullitsList, "");
+          expect(res).toBe(false);
+        });
+      });
+
+      describe("getPrevSlide", () => {
+        it("not work getPrevSlide", () => {
+          itemsNextSlide[0].classList.add(nexrSldCls);
+          const res = getPrevSlide(0, itemsNextSlide, bullitsList, "");
+          expect(res).toBe(false);
+        });
+      });
 
       bullitsList.innerHTML = "";
     });

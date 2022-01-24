@@ -16,7 +16,7 @@ export function sliderJS() {
   let launcher;
   function launchSlider(bullit, isBack = false) {
     const actNum = getNumberActive(items);
-    if (actNum > 0) {
+    if (actNum >= 0) {
       if (isBack) {
         getPrevSlide(actNum, items, bullit, "");
       } else {
