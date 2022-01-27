@@ -51,7 +51,6 @@ export function getNextSlide(
 
   const numAct = getNumberActive(arr);
   const currentItem = arr[numAct];
-
   if (
     !currentItem.classList.contains(config.nextSlideClass) &&
     !currentItem.classList.contains(config.prevSlideClass)

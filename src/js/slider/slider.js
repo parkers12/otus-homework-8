@@ -1,4 +1,5 @@
 import config from "./config";
+
 import {
   getArraySlides,
   addFirstSlideActive,
@@ -8,24 +9,17 @@ import {
   getBullitList,
 } from "./functions";
 
+import { launchSlider } from "./launcher";
+
 export function sliderJS() {
   const slider = document.getElementById(config.sliderId);
   const items = getArraySlides(slider);
-
+  console.log(items);
   let sliderBullit = "";
   let launcher;
-  function launchSlider(bullit, isBack = false) {
-    const actNum = getNumberActive(items);
-    if (actNum >= 0) {
-      if (isBack) {
-        getPrevSlide(actNum, items, bullit, "");
-      } else {
-        getNextSlide(actNum, items, bullit, "");
-      }
-      launcher = setTimeout(launchSlider, config.slideChangeInterval, bullit);
-    } else {
-      console.log("Error");
-    }
+
+  function starterSlider(bullit, isBack, itemsSl) {
+    launchSlider(bullit, isBack, itemsSl);
   }
 
   if (slider !== null && items.length > 0) {
@@ -34,9 +28,21 @@ export function sliderJS() {
       if (config.isBullit) {
         getBullitList(items.length, slider);
         sliderBullit = document.getElementById(config.sliderBullit);
-        setTimeout(launchSlider, config.slideChangeInterval, sliderBullit);
+        launcher = setTimeout(
+          starterSlider,
+          config.slideChangeInterval,
+          sliderBullit,
+          false,
+          items
+        );
       } else {
-        setTimeout(launchSlider, config.slideChangeInterval, "");
+        launcher = setTimeout(
+          starterSlider,
+          config.slideChangeInterval,
+          "",
+          false,
+          items
+        );
       }
     }
   } else {
@@ -52,18 +58,26 @@ export function sliderJS() {
   arrows.onclick = (e) => {
     const button = e.target.getAttribute("id");
     if (button === "arrowsLeft") {
-      launchSlider(sliderBullit, true);
+      starterSlider(sliderBullit, true, items);
       clearTimeout(launcher);
     } else if (button === "arrowsRight") {
-      launchSlider(sliderBullit);
+      starterSlider(sliderBullit, false, items);
       clearTimeout(launcher);
     } else {
       const buttonElement = document.getElementById(button);
-      if (buttonElement.classList.indexOf("stop") > 0) {
-        buttonElement.classList.remove("stop");
-        launchSlider(sliderBullit);
+      const buttonElemSlasses = buttonElement.classList;
+      const isPause = buttonElement.classList.contains(config.stopSlider);
+      if (isPause) {
+        buttonElemSlasses.remove(config.stopSlider);
+        launcher = setTimeout(
+          starterSlider,
+          config.slideChangeInterval,
+          sliderBullit,
+          false,
+          items
+        );
       } else {
-        buttonElement.classList.add("stop");
+        buttonElemSlasses.add(config.stopSlider);
         clearTimeout(launcher);
       }
     }
@@ -77,14 +91,14 @@ export function sliderJS() {
       const idTargetSlide = Number(targetSlide.split("-")[1]);
       clearTimeout(launcher);
       const actNum2 = getNumberActive(items);
-      if (actNum2 > 0) {
+      if (actNum2 >= 0) {
         if (actNum2 < idTargetSlide) {
           getNextSlide(actNum2, items, sliderBullit, idTargetSlide);
         } else {
           getPrevSlide(actNum2, items, sliderBullit, idTargetSlide);
         }
       } else {
-        console.log("Error");
+        console.log("Error: without active slide");
       }
     }
   };

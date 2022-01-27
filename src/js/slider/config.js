@@ -7,6 +7,7 @@ const config = {
   nextSlideClass: "next",
   prevSlideClass: "prev",
   backBullitClass: "back",
+  stopSlider: "stop",
   slideChangeInterval: 5000,
   isBullit: true, // show / hide bullits
   sliderBullit: "sliderBullit",
