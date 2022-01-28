@@ -11,6 +11,8 @@ const config = {
   slideChangeInterval: 5000,
   isBullit: true, // show / hide bullits
   sliderBullit: "sliderBullit",
+  arrowsLeft: "arrowsLeft",
+  arrowsRight: "arrowsRight",
   // arrows: true    // show / hide arrows
 };
 export default config;

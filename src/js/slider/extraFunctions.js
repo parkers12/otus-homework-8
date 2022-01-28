@@ -26,6 +26,7 @@ export function classDelete(
   }
 
   if (typeof classesDel === "string") {
+    // string or []
     arr[activeSlide === arr.length - 1 ? 0 : nextElem].classList.remove(
       classesDel
     );

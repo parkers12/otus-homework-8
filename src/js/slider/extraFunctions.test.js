@@ -73,33 +73,68 @@ describe("extraFunctions", () => {
 
     itemsToggle[activeItem].classList.add(...classesPrev);
 
-    it("show next slide", () => {
+    it("delete classes", () => {
       const nextElem = activeItem + 1;
       itemsToggle[nextElem].classList.add(...classesNext);
       const classesDel = `${prevSldCls} ${nextSldCls}`.split(" ");
       classDelete(classesAll, classesDel, activeItem, nextElem, itemsToggle);
       const isClassActive =
         itemsToggle[nextElem].classList.contains(activeSldCls);
+      const isClassDel =
+        itemsToggle[activeItem].classList.contains(activeSldCls);
       expect(isClassActive).toEqual(true);
+      expect(isClassDel).toEqual(false);
     });
 
-    it("show previous slide", () => {
+    it("delete classes go back", () => {
       const nextElem = activeItem - 1;
       itemsToggle[nextElem].classList.add(...classesNext);
       const classesDel = `${prevSldCls} ${nextSldCls}`.split(" ");
       classDelete(classesAll, classesDel, activeItem, nextElem, itemsToggle);
       const isClassActive =
         itemsToggle[nextElem].classList.contains(activeSldCls);
+      const isClassDel =
+        itemsToggle[activeItem].classList.contains(activeSldCls);
       expect(isClassActive).toEqual(true);
+      expect(isClassDel).toEqual(false);
     });
 
-    it("show previous slide", () => {
-      const nextElem = activeItem - 1;
+    it("delete classes array", () => {
+      const nextElem = 0;
       itemsToggle[nextElem].classList.add(...classesNext);
-      classDelete(classesAll, nextSldCls, activeItem, nextElem, itemsToggle);
+      const classesDel = `${prevSldCls} ${nextSldCls}`.split(" ");
+      classDelete(
+        classesAll,
+        classesDel,
+        activeItem + 2,
+        nextElem,
+        itemsToggle
+      );
       const isClassActive =
         itemsToggle[nextElem].classList.contains(activeSldCls);
+      const isClassDel =
+        itemsToggle[activeItem].classList.contains(activeSldCls);
       expect(isClassActive).toEqual(true);
+      expect(isClassDel).toEqual(false);
+    });
+
+    it("delete classes string", () => {
+      const nextElem = activeItem - 1;
+      itemsToggle[nextElem].classList.add(...classesNext);
+      const classesDel = `${prevSldCls}`;
+      classDelete(
+        classesAll,
+        classesDel,
+        activeItem - 2,
+        nextElem,
+        itemsToggle
+      );
+      const isClassActive =
+        itemsToggle[nextElem].classList.contains(activeSldCls);
+      const isClassDel =
+        itemsToggle[activeItem].classList.contains(activeSldCls);
+      expect(isClassActive).toEqual(true);
+      expect(isClassDel).toEqual(false);
     });
   });
 
