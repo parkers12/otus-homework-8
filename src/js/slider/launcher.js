@@ -1,14 +1,15 @@
 import { getNumberActive, getPrevSlide, getNextSlide } from "./functions";
+import { errorMessage } from "./errorMessage";
 
-export function launchSlider(bullit, isBack, itemsSlider) {
-  const actNum = getNumberActive(itemsSlider);
+export function launchSlider(bullit, isBack, items) {
+  const actNum = getNumberActive(items);
   if (actNum >= 0) {
     if (isBack) {
-      getPrevSlide(actNum, itemsSlider, bullit, "");
+      getPrevSlide(actNum, items, bullit, "");
     } else {
-      getNextSlide(actNum, itemsSlider, bullit, "");
+      getNextSlide(actNum, items, bullit, "");
     }
   } else {
-    console.log("Error: without active slide");
+    errorMessage("Error: without active slide");
   }
 }

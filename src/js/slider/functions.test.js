@@ -1,6 +1,6 @@
 import {
   getArraySlides,
-  addFirstSlideActive,
+  addFirstSldActive,
   getNumberActive,
   getNextSlide,
   getPrevSlide,
@@ -54,9 +54,9 @@ describe("Plugin Slider", () => {
 
   describe("Slider", () => {
     const itemsToActive = [...sliderList.querySelectorAll("li")];
-    describe("addFirstSlideActive", () => {
+    describe("addFirstSldActive", () => {
       it("first slide is active", () => {
-        addFirstSlideActive(itemsToActive[0]);
+        addFirstSldActive(itemsToActive[0]);
         const itemActive = itemsToActive[0].classList.contains(activeSldCls);
         expect(itemActive).toBe(true);
       });

@@ -1,6 +1,7 @@
 import config from "./config";
 import { launchSlider } from "./launcher";
 import { getPrevSlide, getNextSlide } from "./functions";
+import { errorMessage } from "./errorMessage";
 
 jest.mock("./functions", () => {
   const originalModule = jest.requireActual("./functions");
@@ -9,6 +10,15 @@ jest.mock("./functions", () => {
     ...originalModule,
     getPrevSlide: jest.fn(),
     getNextSlide: jest.fn(),
+  };
+});
+
+jest.mock("./errorMessage", () => {
+  const originalModule = jest.requireActual("./errorMessage");
+  return {
+    __esModule: true,
+    ...originalModule,
+    errorMessage: jest.fn(),
   };
 });
 
@@ -28,9 +38,8 @@ describe("launchSlider", () => {
   const bullit = document.getElementById(config.sliderBullit);
 
   it("Without active slide", () => {
-    console.log = jest.fn();
     launchSlider(bullit, true, items);
-    expect(console.log.mock.calls[0][0]).toBe("Error: without active slide");
+    expect(errorMessage).toHaveBeenCalled();
   });
 
   it("Get call functions", () => {
@@ -39,7 +48,7 @@ describe("launchSlider", () => {
     expect(getNextSlide).toHaveBeenCalled();
   });
 
-  it("show prev slide", () => {
+  it("Show prev slide", () => {
     items[0].classList.add(config.activeSlideClass);
     launchSlider(bullit, true, items);
     expect(getPrevSlide).toHaveBeenCalled();

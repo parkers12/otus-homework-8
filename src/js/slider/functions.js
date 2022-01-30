@@ -17,7 +17,7 @@ export function getArraySlides(slider) {
   return items;
 }
 
-export function addFirstSlideActive(firstItem) {
+export function addFirstSldActive(firstItem) {
   return firstItem.classList.add(activeSldCls);
 }
 
@@ -72,7 +72,7 @@ export function getNextSlide(
       arr
     );
 
-    if (sliderBullit !== "") {
+    if (sliderBullit) {
       getBullitActive(sliderBullit, nextElem);
     }
     return true;
@@ -119,7 +119,7 @@ export function getPrevSlide(
       arr
     );
 
-    if (sliderBullit !== "") {
+    if (sliderBullit) {
       getBullitActive(sliderBullit, nextElem);
     }
     return true;
