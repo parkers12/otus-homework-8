@@ -1,0 +1,36 @@
+/* Country styles */
+
+.country {
+  @include flex-column;
+  padding-top: $sp * 20;
+  font-weight: $font-weight-light;
+
+  &__title {
+    text-align: $text-align;
+  }
+
+  &__img {
+    @include img-cover;
+    width: $width-content;
+    height: 40rem;
+    margin: $sp * 5 auto 0;
+  }
+
+  &__text {
+    width: $width-content;
+    margin: 0 auto;
+
+    h2 {
+      text-align: $text-align;
+      margin-top: $sp * 8;
+    }
+
+    p {
+      line-height: $line-height + 10;
+      text-align: justify;
+      margin-top: $sp * 4;
+    }
+  }
+}
+
+/* Country styles */

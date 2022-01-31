@@ -1,0 +1,55 @@
+/* Nav header styles */
+
+.nav-header {
+  @include flex-center;
+  font-weight: $font-weight-light;
+
+  &__item {
+    font-size: $font-size-main;
+    line-height: $line-height;
+    color: $white;
+    position: relative;
+
+    &:after,
+    &:hover:after {
+      content: "";
+      display: block;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 0.1rem;
+      background-color: $white;
+      transition: $transition;
+    }
+
+    &:after {
+      width: 0;
+    }
+
+    &:hover:after {
+      width: 100%;
+      left: 0;
+    }
+
+    & + & {
+      margin-left: $sp * 12;
+    }
+  }
+
+  &_desctop {
+    flex-direction: row;
+  }
+
+  &_mobile {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: $sp * 9;
+
+    .nav-header__item + .nav-header__item {
+      margin-left: 0;
+      margin-top: $sp * 4;
+    }
+  }
+}
+
+/* /Nav header styles */

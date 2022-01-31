@@ -1,0 +1,65 @@
+/* Location item styles */
+
+.location-item {
+  display: block;
+  width: calc((100% - $sp * 6 * 2) / 3);
+  min-width: calc((100% - $sp * 6 * 2) / 3);
+  border-radius: $border-radius * 2.5;
+  background: $white;
+  border: 0.1rem solid rgba($black, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    box-shadow: 0 0.6rem 3.5rem rgba($black, 0.08);
+
+    .location-item__img {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+  }
+
+  &:nth-child(3n + 2),
+  &:nth-child(3n) {
+    margin-left: $sp * 6;
+  }
+
+  &:nth-child(n + 4) {
+    margin-top: $sp * 6;
+  }
+
+  &__img {
+    @include img-cover;
+    opacity: $opacity-middle + 0.2;
+    width: 100%;
+    height: 33rem;
+    transition: $transition;
+  }
+
+  &__data {
+    padding: $sp * 8 $sp * 9;
+    text-align: $text-align;
+
+    &-title,
+    &-subtitle {
+      color: $black;
+      flex: 1;
+    }
+
+    &-subtitle {
+      margin-top: $sp * 2.5;
+      font-size: $font-size-main;
+      line-height: $line-height;
+      opacity: $opacity-middle;
+      max-height: $sp * 14;
+      height: $sp * 14;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+}
+
+/* Location item styles */

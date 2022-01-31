@@ -1,0 +1,8 @@
+# Ignore artifacts:
+node_modules
+build
+coverage
+
+# Ignore all HTML files:
+src/html-includes/_blog.html
+src/html-includes/_location.html

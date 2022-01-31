@@ -1,0 +1,22 @@
+/* Socials styles */
+.socials {
+  @include flex-center;
+
+  &__item {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+
+    & + & {
+      margin-left: $sp * 8;
+    }
+
+    @each $social in $socials {
+      &_#{$social} {
+        background-image: url("#{$path-img-socials}/#{$social}.svg");
+      }
+    }
+  }
+}
+
+/* /Socials styles */

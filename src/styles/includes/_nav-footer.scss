@@ -1,0 +1,35 @@
+/* Nav footer styles */
+
+.nav-footer {
+  display: flex;
+  font-size: $font-size-base * 1.6;
+
+  &__col {
+    @include flex-column;
+    justify-content: flex-start;
+
+    & + & {
+      margin-left: $sp * 25;
+    }
+
+    &-item {
+      font-weight: $font-weight-light;
+      font-size: $font-size-second;
+      line-height: $line-height;
+      letter-spacing: $letter-spacing;
+      color: $black;
+      opacity: $opacity-middle;
+      transition: $transition;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      & + & {
+        margin-top: $sp * 5;
+      }
+    }
+  }
+}
+
+/* /Nav footer styles */

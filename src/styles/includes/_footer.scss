@@ -1,0 +1,70 @@
+/* Footer styles */
+
+.footer {
+  @include flex-between;
+  width: $xl;
+  margin: 0 auto;
+  padding: $sp * 15 0;
+  font-size: $font-size-second;
+  letter-spacing: $letter-spacing;
+  color: $black;
+
+  &__left {
+    @include flex-column;
+    justify-content: space-between;
+    flex: 3;
+
+    &-logo {
+      font-size: $font-size-base * 2.4;
+    }
+
+    &-contacts {
+      @include flex-column;
+
+      &-text,
+      &-email {
+        font-weight: normal;
+        line-height: $line-height + 10;
+        opacity: $opacity-middle;
+      }
+
+      &-email {
+        color: $black;
+        transition: $transition;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__nav {
+    flex: 4;
+  }
+
+  &__subscribe {
+    @include flex-column;
+    flex: 4;
+
+    &-title {
+      font-weight: $font-weight-light;
+      font-size: $font-size-base * 2;
+    }
+
+    &-form {
+      display: flex;
+      margin-top: $sp * 10;
+
+      &-input {
+        flex: 1;
+      }
+
+      &-button {
+        margin-left: $sp * 4;
+      }
+    }
+  }
+}
+
+/* /Footer styles */

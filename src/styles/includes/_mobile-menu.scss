@@ -1,0 +1,25 @@
+/* Mobile menu styles */
+
+.mobile-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background: rgba($black, 0.85);
+  padding: $sp * 6 $sp * 4 $sp * 4;
+  z-index: 1;
+  display: none;
+
+  &.mobile-menu_show {
+    display: block;
+  }
+
+  &__logo {
+    font-size: $font-size-base * 2.4;
+    color: $white;
+  }
+}
+
+/* /Mobile menu styles */

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ru">
+  @@include('../html-includes/_head.html')
+  <body>
+    <div class="primary">
+      <div class="primary__content">
+        @@include('../html-includes/_header.html')
+        @@include('../html-includes/_slider.html')
+        <main class="primary__content-main">
+          @@include('../html-includes/_location.html', { "view": "block" })
+          @@include('../html-includes/_blog.html', { "view": "block" })
+        </main>
+      </div>
+      <div class="primary__footer">
+        @@include('../html-includes/_footer.html')
+      </div>
+    </div>
+  </body>
+</html>

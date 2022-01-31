@@ -1,0 +1,36 @@
+/* Mixin */
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+@mixin img-cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+@mixin middle-media {
+  width: 100%;
+  padding-left: $sp * 6;
+  padding-right: $sp * 6;
+}
+
+@mixin little-media {
+  width: 100%;
+  padding-left: $sp * 4;
+  padding-right: $sp * 4;
+}
+
+/* /Mixin */
