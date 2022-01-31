@@ -1,3 +1,4 @@
+import config from "./config";
 import {
   getArraySlides,
   addFirstSldActive,
@@ -7,13 +8,13 @@ import {
   getBullitList,
 } from "./functions";
 
-import config from "./config";
-
 import {
   addClassesActive,
   classDelete,
   getBullitActive,
 } from "./extraFunctions";
+
+jest.useFakeTimers();
 
 jest.mock("./extraFunctions", () => {
   const originalModule = jest.requireActual("./extraFunctions");
@@ -31,10 +32,6 @@ const sliderBullitId = config.sliderBullit;
 const nexrSldCls = config.nextSlideClass;
 
 describe("Plugin Slider", () => {
-  afterAll(() => {
-    document.body.innerHTML = "";
-  });
-
   const slider = document.createElement("div");
   document.body.appendChild(slider).setAttribute("class", "slider");
   slider.innerHTML = `<ul id=${config.sliderId}>
@@ -106,6 +103,10 @@ describe("Plugin Slider", () => {
     });
 
     describe("getNextPrevSlide", () => {
+      beforeEach(() => {
+        jest.runAllTimers();
+      });
+
       const bullitsList = document.getElementById(sliderBullitId);
       const itemsNextSlide = [...sliderList.querySelectorAll("li")];
       const numberSlTest = 1;
@@ -125,15 +126,21 @@ describe("Plugin Slider", () => {
 
       describe("getSlide", () => {
         it("go from slide 2 to slide 5", () => {
+          jest.runAllTimers();
+          addClassesActive.mockImplementation(() => [
+            "li.slider__list-item",
+            "li.slider__list-item",
+            "li.slider__list-item",
+            "li.slider__list-item.active",
+            "li.slider__list-item",
+          ]);
           itemsNextSlide[numberSlTest].classList.add(activeSldCls);
           getNextSlide(numberSlTest, itemsNextSlide, bullitsList, numberNtTest);
           const classAct = itemsNextSlide[numberNtTest].classList.contains(
             config.activeSlideClass
           );
           expect(addClassesActive).toHaveBeenCalled();
-          setTimeout(() => {
-            expect(classDelete).toHaveBeenCalled();
-          }, 1000);
+          // expect(classDelete).toHaveBeenCalled();
           expect(getBullitActive).toHaveBeenCalled();
           expect(classAct).toBe(false);
         });
@@ -144,9 +151,7 @@ describe("Plugin Slider", () => {
           itemsNextSlide[itemsNextSlide.length - 1].classList.add(activeSldCls);
           getNextSlide(0, itemsNextSlide, bullitsList, numberNtTest);
           expect(addClassesActive).toHaveBeenCalled();
-          setTimeout(() => {
-            expect(classDelete).toHaveBeenCalled();
-          }, 1000);
+          expect(classDelete).toHaveBeenCalled();
           expect(getBullitActive).toHaveBeenCalled();
         });
       });
@@ -156,9 +161,7 @@ describe("Plugin Slider", () => {
           itemsNextSlide[itemsNextSlide.length - 1].classList.add(activeSldCls);
           getNextSlide(numberNtTest, itemsNextSlide, bullitsList, "");
           expect(addClassesActive).toHaveBeenCalled();
-          setTimeout(() => {
-            expect(classDelete).toHaveBeenCalled();
-          }, 1000);
+          expect(classDelete).toHaveBeenCalled();
           expect(getBullitActive).toHaveBeenCalled();
         });
       });
@@ -168,9 +171,7 @@ describe("Plugin Slider", () => {
           itemsNextSlide[numberSlTest].classList.add(activeSldCls);
           getNextSlide(numberSlTest, itemsNextSlide, bullitsList, "");
           expect(addClassesActive).toHaveBeenCalled();
-          setTimeout(() => {
-            expect(classDelete).toHaveBeenCalled();
-          }, 1000);
+          expect(classDelete).toHaveBeenCalled();
           expect(getBullitActive).toHaveBeenCalled();
         });
       });
@@ -183,9 +184,7 @@ describe("Plugin Slider", () => {
             config.activeSlideClass
           );
           expect(addClassesActive).toHaveBeenCalled();
-          setTimeout(() => {
-            expect(classDelete).toHaveBeenCalled();
-          }, 1000);
+          expect(classDelete).toHaveBeenCalled();
           expect(getBullitActive).toHaveBeenCalled();
           expect(classAct).toBe(true);
         });
@@ -204,9 +203,7 @@ describe("Plugin Slider", () => {
             config.activeSlideClass
           );
           expect(addClassesActive).toHaveBeenCalled();
-          setTimeout(() => {
-            expect(classDelete).toHaveBeenCalled();
-          }, 1000);
+          expect(classDelete).toHaveBeenCalled();
           expect(getBullitActive).toHaveBeenCalled();
           expect(classAct).toBe(true);
         });
@@ -220,9 +217,7 @@ describe("Plugin Slider", () => {
             config.activeSlideClass
           );
           expect(addClassesActive).toHaveBeenCalled();
-          setTimeout(() => {
-            expect(classDelete).toHaveBeenCalled();
-          }, 1000);
+          expect(classDelete).toHaveBeenCalled();
           expect(getBullitActive).toHaveBeenCalled();
           expect(classAct).toBe(true);
         });
@@ -236,9 +231,7 @@ describe("Plugin Slider", () => {
             config.activeSlideClass
           );
           expect(addClassesActive).toHaveBeenCalled();
-          setTimeout(() => {
-            expect(classDelete).toHaveBeenCalled();
-          }, 1000);
+          expect(classDelete).toHaveBeenCalled();
           expect(getBullitActive).toHaveBeenCalled();
           expect(classAct).toBe(true);
         });
