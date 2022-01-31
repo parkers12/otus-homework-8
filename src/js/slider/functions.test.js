@@ -126,7 +126,6 @@ describe("Plugin Slider", () => {
 
       describe("getSlide", () => {
         it("go from slide 2 to slide 5", () => {
-          jest.runAllTimers();
           addClassesActive.mockImplementation(() => [
             "li.slider__list-item",
             "li.slider__list-item",
